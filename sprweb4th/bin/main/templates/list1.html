@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">	<!-- Java Template Engine -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>타임리프 연습장</h2>
+<!-- jsp의 <%=request.getAttribute("msg"); 와 같은 의미-->
+메세지 : <span th:text="${msg}">이 영역의 텍스트는 순수 html에서는 표시되나 template를 쓰면 안보임</span><br>
+메세지 : <span>[[${msg}]]</span><br><!--대채 문구가 없음 -->
+메시지(값 결합 + 사용) : <span th:text="'메세지는' + ${msg} + '입니다'"></span><br>
+메시지(리터럴 치환) : <span th:text="|메세지는${msg}입니다|"></span><br>
+* 지역변수 처리 : 
+<span th:with="kor=90,eng=80"><!-- th:with="변수명=값,...' --><!-- '문자열' , 숫자-->
+	<i style="color:blue" th:text="|${kor} + ${eng} =${kor +eng}|"></i>
+</span>
+<br>
+* 관계연산자 : <br>
+<span th:text=" 3 >= 4"></span> <span th:text=" 3 < 4"></span>
+<span th:text=" a >= b"></span> <span th:text=" a < b"></span>
+<span th:text=" 3 == 4"></span> <span th:text=" 3 != 4"></span>
+<span th:text=" a == b"></span> <span th:text=" a != b"></span>
+<hr>
+조건 연산(if, unless) : 
+<span th:text="5 > 4?'크다':'작다'">삼항 연산</span>
+<br>
+조건 연산자 : true
+<span th:if="5 > 4"> 
+	조건이 참일 때 수행
+</span>
+<br>
+조건 연산자 : false
+<span th:unless="5 == 4"> 
+	조건이 거짓일 때 수행
+</span>
+<br>
+switch 조건문
+<div th:switch="${msg2}">
+	<b th:case = "james" th:text="|${msg2}님|">자료 표시</b>
+	<i th:case = "tom" th:text="|${msg2}님|">자료 표시</i>
+	<strong th:case = "*">어떤값도 매칭되지 않을때</strong>
+</div>
+
+<th:block th:switch="${msg2}">
+	<b th:case = "james" th:text="|${msg2}님|">자료 표시</b>
+	<i th:case = "tom" th:text="|${msg2}님|">자료 표시</i>
+	<strong th:case = "*">모르는 이름이에요(어떤값도 매칭되지 않을때)</strong>
+</th:block>
+<hr>
+DTO 자료 출력 : <Br>
+<span th:text="${sangpum.code}">코드</span>	<span th:text="${sangpum['code']}">코드</span><br>
+<span th:text="${sangpum.sang}">품명</span>	<span>[[${sangpum.sang}]]</span><br>
+<span th:text="${sangpum.price}">가격</span>	<span>[[${sangpum['price']}]]</span><br>
+
+<div th:object = "${sangpum}">
+	<span th:text="*{code}"></span>
+	<span th:text="*{sang}"></span>
+	<span th:text="*{price}"></span> <span th:text="*{['price']}"></span> <span>[[*{['price']}]]</span>
+</div>
+
+반복출력 : <br>
+<table border="1">
+	<tr>
+		<th>코드</th><th>품명</th><th>가격</th>
+	</tr>
+	<tr th:each="obj:${list}">
+		<td>[[${obj.code}]]</td>
+		<td>[[${obj.sang}]]</td>
+		<td>[[${obj.price}]]</td>
+	</tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
