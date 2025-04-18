@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>직원 목록</title>
+</head>
+<body>
+<h3>직원 출력(@MVC : MyBatis 방법)</h3>
+<table border="1">
+    <tr>
+        <th>사번</th><th>직원명</th><th>성별</th><th>연봉</th>
+    </tr>
+    <th:block th:if="${#lists.size(datas) > 0}">
+        <tr th:each="data : ${datas}">
+            <td th:text="${data.jikwonno}"></td>
+            <td th:text="${data.jikwonname}"></td>
+            <td th:text="${data.jikwongen}"></td>
+            <td th:text="${data.jikwonpay}"></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <form th:action="@{/search}" method="get">
+                    이름 검색 : <input type="text" name="searchValue">
+                    <input type="submit" value="검색">
+                </form>
+            </td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
