@@ -22,7 +22,7 @@ public interface DataMapperInterface {
 	int insertData(MemBean bean);
 	
 	@Update("update mem set name=#{name}, addr=#{addr} where num=#{num}")
-	int updateDatat(MemBean bean);
+	int updateData(MemBean bean);
 	
 	@Delete("delete from mem where num=#{num}")
 	int deleteData(String num);

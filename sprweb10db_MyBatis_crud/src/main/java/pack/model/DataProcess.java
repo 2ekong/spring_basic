@@ -35,4 +35,33 @@ public class DataProcess {
 			return false;
 		
 	}
+	
+	//레코드 한개 읽기
+	public MemDto getData(String num) {
+		MemDto memDto = mapperInterface.selectPart(num);
+		return memDto;
+	}
+	
+	//수정
+	public boolean update(MemBean bean) {
+		//번호 중복 확인 또는 번호 자동 증가 생략
+		logger.info("num : " + bean.getNum());
+		
+		int re = mapperInterface.updateData(bean);
+		if(re > 0)
+			return true;
+		else
+			return false;
+		
+	}
+	
+	//삭제
+	public boolean delete(String num) {
+		int re = mapperInterface.deleteData(num);
+		if(re > 0)
+			return true;
+		else
+			return false;
+		
+	}
 }
