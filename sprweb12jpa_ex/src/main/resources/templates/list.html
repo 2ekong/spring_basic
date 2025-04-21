@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>직원 정보 (@MVC -JPA)</h3>
+<table border="1">
+	<tr>
+		<td colspan="4">
+			<form th:action ="@{/search}" method = "get">
+				직급 : <input type = "text" name = "searchValue">
+				<input type="submit" value = "확인">
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<th>사번</th><th>직원명</th><th>성별</th><th>연봉</th>
+	</tr>
+	<th:block th:if="${datas.size > 0}">
+	<tr th:each="j:${datas}">
+		<td>[[${j.no}]]</td>
+		<td>[[${j.name}]]</td>
+		<td>[[${j.gen}]]</td>
+		<td>[[${j.pay}]]</td>
+	</tr>
+	</th:block>
+	<tr>
+		<td colspan="4" th:text="'인원수: ' + ${datas.size} + '명'"> </td>
+	</tr>
+</table>
+</body>
+</html>
