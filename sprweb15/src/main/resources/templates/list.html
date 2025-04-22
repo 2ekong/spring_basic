@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>미니 게시판</h3>
+<th:block th:i="${list.size > 0}">
+<table border = "1">
+	<tr>
+		<th>번호</th><th>글제목</th><th>작성자</th><th>조회수</th>
+	</tr>
+	<tr th:each = "data:${list}">
+		<td th:text="${data.num}"></td>
+		<td th:text="${data.title}"></td>
+		<td th:text="${data.author}"></td>
+		<td th:text="${data.readcnt}"></td>
+		
+	</tr>
+</table>
+</th:block>
+</body>
+</html>
