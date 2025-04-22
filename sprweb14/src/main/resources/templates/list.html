@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/script.js"></script>
+
+
+</head>
+<body>
+<div class="container mt-4">
+    <h3>게시판</h3>
+    <div class="button-area">
+        <a th:href="@{/insert}" class="btn btn-success">추가</a>
+    </div>
+
+    <th:block th:if="${list.size() > 0}">
+        <table class="table table-bordered">
+            <tr>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th>조회수</th>
+            </tr>
+            <tr th:each="data : ${list}">
+                <td th:text="${data.num}"></td>
+                <td th:text="${data.author}"></td>
+                <td>
+                    <a th:href="@{/view(num=${data.num})}" th:text="${data.title}"></a>
+                </td>
+                <td th:text="${data.formattedBwrite}"></td>
+                <td th:text="${data.readcnt}"></td>
+            </tr>
+        </table>
+    </th:block>
+</div>
+
+</body>
+</html>

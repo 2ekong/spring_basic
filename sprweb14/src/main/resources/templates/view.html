@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>글 상세보기</title>
+<!-- Bootstrap CSS CDN -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- 너의 커스텀 CSS (나중에 작성할 파일) -->
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="container mt-4">
+		<h3>글 상세보기</h3>
+		<table class="table table-bordered">
+			<tr>
+				<th>번호</th>
+				<td th:text="${dto.num}"></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td th:text="${dto.author}"></td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td th:text="${dto.title}"></td>
+			</tr>
+			<tr>
+				<th>날짜</th>
+				<td th:text="${dto.formattedBwrite}"></td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td th:text="${dto.readcnt}"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td th:text="${dto.content}"></td>
+			</tr>
+		</table>
+
+		<div class="mt-3">
+			<a th:href="@{/list}" class="btn btn-secondary">목록으로 돌아가기</a> <a
+				th:href="@{/update(num=${dto.num})}" class="btn btn-primary">수정</a>
+			<button type="button" class="btn btn-danger"
+				th:attr="onclick=|confirmDelete(${dto.num})|">삭제</button>
+
+		</div>
+	</div>
+
+	<div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+		aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="confirmDeleteLabel">삭제 확인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="닫기"></button>
+				</div>
+				<div class="modal-body">정말 이 글을 삭제하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">취소</button>
+					<a id="deleteConfirmLink" class="btn btn-danger">삭제</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/script.js"></script>
+</body>
+</html>

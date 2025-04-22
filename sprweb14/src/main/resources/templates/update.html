@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 수정</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 너의 커스텀 CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>글 수정</h3>
+    <form th:action="@{/update}" method="post" id="updateForm">
+        <input type="hidden" name="num" th:value="${dto.num}">
+        작성자: <input type="text" name="author" th:value="${dto.author}" class="form-control"><br>
+        제목: <input type="text" name="title" th:value="${dto.title}" class="form-control"><br>
+        내용:<br>
+        <textarea name="content" rows="5" cols="40" th:text="${dto.content}" class="form-control"></textarea><br>
+        <!-- 수정 확인 모달 띄우기 -->
+        <button type="button" class="btn btn-primary" onclick="confirmUpdate()">수정</button>
+    </form>
+</div>
+
+<!-- 수정 확인 모달 -->
+<div class="modal fade" id="confirmUpdateModal" tabindex="-1" aria-labelledby="confirmUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmUpdateLabel">수정 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body">
+                정말 수정하시겠습니까?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="submitUpdateForm()">수정</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS + 너의 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>
