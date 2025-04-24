@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+<body>
+<script type="text/javascript">
+(function(){
+	alert("비밀번호 불일치")
+})();
+</script>
+<a th:href="@{list(page=${page})}">글보기</a>
+</body>
+</html>
