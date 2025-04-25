@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function submitForm() {
+    document.getElementById('genderForm').submit();
+}
+
+</script>
+</head>
+<body>
+<h3>문제</h3>
+<form th:action="@{/list}" method="get" id="genderForm">
+    고객 출력:
+    <input type="radio" name="gender" value="all"
+           th:checked="${selectedGender == 'all'}"
+           onchange="submitForm();" />전체
+    <input type="radio" name="gender" value="male"
+           th:checked="${selectedGender == 'male'}"
+           onchange="submitForm();" />남성
+    <input type="radio" name="gender" value="female"
+           th:checked="${selectedGender == 'female'}"
+           onchange="submitForm();" />여성
+</form>
+
+<table border="1">
+    <tr>
+        <td>번호</td><td>고객명</td><td>전화</td><td>성별</td><td>나이</td>
+    </tr>
+    <th:block th:if="${datas != null}">
+        <tr th:each="data : ${datas}">
+            <td th:text="${data.gogekno}"></td>
+            <td th:text="${data.gogekname}"></td>
+            <td th:text="${data.gogektel}"></td>
+            <td th:text="${data.gender}"></td>
+            <td th:text="${data.age}"></td>
+        </tr>
+    </th:block>
+</table>
+
+
+<p>총 인원: <span th:text="${gogekCount}"></span>명</p>
+
+</body>
+</html>
