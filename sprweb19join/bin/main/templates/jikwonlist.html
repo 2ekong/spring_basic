@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>직원자료</title>
+</head>
+<body>
+<h2>직원 정보</h2>
+<table border="1">
+  <tr>
+  	<th>직원번호</th><th>직원명</th><th>직급</th><th>부서명</th><th>부서전화</th><th>연봉</th>
+  </tr>
+  <tr th:each="jikwon:${jikwons}">
+  	<td th:text="${jikwon.jikwonno}"></td>
+  	<td th:text="${jikwon.jikwonname}"></td>
+  	<td th:text="${jikwon.jikwonjik}"></td>
+  	<td th:text="${jikwon.buserDto.busername}"></td>
+  	<td th:text="${jikwon.buserDto.busertel}"></td>
+  	<td th:text="${jikwon.jikwonpay}"></td>
+  </tr>
+</table>
+</body>
+</html>
