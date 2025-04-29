@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>담당 직원 찾기</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>담당 직원 찾기</h2>
+
+<form id="searchForm">
+    고객번호 : <input type="text" name="gogekno" required>
+    고객명 : <input type="text" name="gogekname" required>
+    <input type="submit" value="확인">
+</form>
+
+<div id="result"></div>
+
+<script>
+$(document).ready(function(){
+    $("#searchForm").submit(function(e){
+        e.preventDefault();
+
+        let gogekno = $("input[name='gogekno']").val();
+        let gogekname = $("input[name='gogekname']").val();
+
+        $.ajax({
+            url: "/search",
+            type: "GET",
+            data: {
+                gogekno: gogekno,
+                gogekname: gogekname
+            },
+            success: function(response){
+                if(response.data){
+                    let info = response.data;
+                    let output = "<h3>담당 직원 정보</h3>";
+                    output += "직원명 : " + info.jikwonname + "<br>";
+                    output += "직급 : " + info.jikwonjik + "<br>";
+                    output += "부서명 : " + info.busername + "<br>";
+                    output += "부서전화 : " + info.busertel + "<br>";
+
+                    $("#result").html(output);
+                } else {
+                    $("#result").html(response.error);
+                }
+            },
+            error: function(){
+                $("#result").html("서버 오류 발생");
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
