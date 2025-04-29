@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//alert("a");
+	$("#btnShow").click(function(){
+		$("tbody").empty();
+		$.ajax({
+			type:"get",
+			url:"sangpums",
+			dataType:"json",
+			success:function(sangpumdata){
+				//alert(sangpumdata.datas);
+				let str = "";
+				let sdatas = sangpumdata.datas;
+				$(sdatas).each(function(index, arr){
+					str +="<tr>";
+					str +="<td>" + arr["code"] + "</td>";
+					str +="<td>" + arr["sang"] + "</td>";
+					str +="<td>" + arr["su"] + "</td>";
+					str +="<td>" + arr.dan + "</td>";
+					str +="</tr>";
+				});
+				$("tbody").html(str);	//HTML 전체를 덮어쓰기 (단,str이 HTML이어야 함)
+			},
+			error:function(e){
+				//$("#show.Err").text("에러 발생 : ", e);	//텍스트만 변경
+				jQuery("#showErr").text("에러 발생 : ", e);
+			}
+		})
+	})
+});
+</script>
+</head>
+<body>
+<h2>상품 정보(@MVC + Ajax)</h2>
+<button id = "btnShow"> 상품 보기</button>
+<table>
+	<thead>
+		<tr><th>코드</th><th>품명</th><th>수량</th><th>단가</th></tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+</table>
+<br>
+<div id = "showErr"></div>
+</body>
+</html>
