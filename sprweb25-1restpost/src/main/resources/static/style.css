@@ -1,0 +1,50 @@
+table {
+    border-collapse: collapse;
+    width: 600px;
+    margin: 30px auto;
+    background-color: #fff8f0;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid #ffa94d;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #ff922b;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #fff0e0;
+}
+
+.input-area {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.input-area input {
+    padding: 6px 10px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.input-area button {
+    padding: 6px 14px;
+    background-color: #ffa94d;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.input-area button:hover {
+    background-color: #ff922b;
+}

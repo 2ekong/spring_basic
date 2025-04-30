@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 정보 조회</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="input-area">
+    직원번호: <input type="text" id="jikwonno" placeholder="직원번호">
+    직원명: <input type="text" id="jikwonname" placeholder="직원명">
+    <button onclick="fetchCustomers()">확인</button>
+</div>
+<hr>
+<table border="1" id="customerTable">
+    <thead>
+    <tr>
+        <th>고객번호</th>
+        <th>고객명</th>
+        <th>고객전화</th>
+    </tr>
+    </thead>
+    <tbody id="customerBody"></tbody>
+</table>
+<div id="countBox" style="text-align: center;"></div>
+
+<script>
+    function fetchCustomers() {
+        const jikwonno = document.querySelector("#jikwonno").value;
+        const jikwonname = document.querySelector("#jikwonname").value;
+        const tbody = document.querySelector("#customerBody");
+        const countBox = document.querySelector("#countBox");
+
+        fetch("/get-gogek", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({jikwonno, jikwonname})
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("직원이 존재하지 않거나 요청 실패");
+                }
+                return response.json();
+            })
+            .then(customers => {
+                tbody.innerHTML = "";
+                customers.forEach(c => {
+                    tbody.innerHTML += `
+                    <tr>
+                        <td>${c.gogekno}</td>
+                        <td>${c.gogekname}</td>
+                        <td>${c.gogektel}</td>
+                    </tr>`;
+                });
+                countBox.innerText = `고객 수: ${customers.length}명`;
+            })
+    }
+</script>
+
+</body>
+</html>
