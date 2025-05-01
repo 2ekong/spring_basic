@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function submitMember() {
+            const num = document.querySelector("input[name='num']").value;
+            const name = document.querySelector("input[name='name']").value;
+            const addr = document.querySelector("input[name='addr']").value;
+            fetch(`/api/members`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({num, name, addr}) // json -> string, key, value 똑같으면 이렇게 간단하게 적어도 된다.
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('회원 등록 실패');
+                    return response.json(); // string -> json
+                })
+                .then(data => {
+                    if (data.isSuccess) {
+                        alert('회원 등록 완료');
+                        location.href = '/members/list'; // 추가 후 목록 보기
+                    }
+                })
+                .catch(error => {
+                    console.log('error: ', error);
+                });
+        }
+    </script>
+</head>
+<body>
+<h2>자료 추가</h2>
+<form onsubmit="event.preventDefault(); submitMember()">
+    번호: <input type="text" name="num"> <br>
+    이름: <input type="text" name="name"> <br>
+    주소: <input type="text" name="addr"> <br>
+    <input type="submit" value="등록">
+</form>
+</body>
+</html>
