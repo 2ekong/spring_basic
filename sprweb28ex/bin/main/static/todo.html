@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>📝 Todo List</h1>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="showTab('list')">목록 보기</button>
+        <button class="tab-button" onclick="showTab('add')">새 일정 추가</button>
+    </div>
+
+    <div id="list" class="tab-content">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>제목</th>
+                    <th>순서</th>
+                    <th>완료 여부</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="todo-list">
+                <!-- AJAX로 데이터 로드 -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="add" class="tab-content" style="display:none;">
+        <form id="todo-form">
+            제목: <input type="text" id="title" required><br>
+            순서: <input type="number" id="order" value="0"><br>
+            완료: <input type="checkbox" id="completed"><br>
+            <button type="submit">추가</button>
+        </form>
+    </div>
+
+    <!-- 수정 Modal -->
+    <div id="edit-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>수정하기</h2>
+            <input type="hidden" id="edit-id">
+            제목: <input type="text" id="edit-title"><br>
+            순서: <input type="number" id="edit-order"><br>
+            완료: <input type="checkbox" id="edit-completed"><br>
+            <button onclick="updateTodo()">수정 완료</button>
+        </div>
+    </div>
+
+    <script src="/js/todo.js"></script>
+</body>
+</html>
