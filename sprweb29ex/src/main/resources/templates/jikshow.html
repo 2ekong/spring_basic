@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>직원 자료</title>
+</head>
+<body>
+
+<div th:if="${session.gogekok} != null">
+    <a th:href="@{/logout}">로그아웃</a>
+</div>
+
+<h2>** 직원 자료 **</h2>
+
+<table border="1">
+    <tr>
+        <th>직원번호</th><th>직원명</th><th>직급</th><th>성별</th><th>부서명</th>
+    </tr>
+    <th:block th:each="jik:${jlist}">
+    <tr>
+        <td>[[${jik.jikwonno}]]</td>
+        <td>[[${jik.jikwonname}]]</td>
+        <td>[[${jik.jikwonjik}]]</td>
+        <td>[[${jik.jikwongen}]]</td>
+        <td>[[${jik.buser.busername}]]</td>
+    </tr>
+    </th:block>
+</table>
+
+</body>
+</html>

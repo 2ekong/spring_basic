@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 로그인</title>
+    <script>
+        function validateForm() {
+            const no = document.getElementById("no").value.trim();
+            const name = document.getElementById("name").value.trim();
+            
+            if (no === "" || name === "") {
+                alert("고객 번호와 이름을 모두 입력해주세요.");
+                return false;
+            }
+            
+            if (isNaN(no)) {
+                alert("고객 번호는 숫자만 입력 가능합니다.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h3>고객 로그인</h3>
+    <form th:action="@{/loginaction}" method="get" onsubmit="return validateForm();">
+        고객 번호: <input type="text" id="no" name="no" required><br><br>
+        고객 이름: <input type="text" id="name" name="name" required><br><br>
+        <input type="submit" value="로그인">
+    </form>
+</body>
+</html>
